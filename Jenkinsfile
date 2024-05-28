@@ -4,25 +4,29 @@ pipeline {
     stages {
         stage('Clonar repositorio') {
             steps {
-                git 'https://github.com/tu-usuario/tu-repositorio.git'
+                git 'https://github.com/ZambranoGamer2002/XplosionNorte.git'
             }
         }
         
-        stage('Construir') {
+        stage('Instalar dependencias') {
             steps {
-                sh 'mvn clean install' // Ejemplo para construir un proyecto Maven, ajusta según tu tecnología
+                sh 'composer install' // Instalar dependencias PHP utilizando Composer
             }
         }
         
         stage('Pruebas') {
             steps {
-                sh 'mvn test' // Ejemplo para ejecutar pruebas unitarias con Maven, ajusta según tu tecnología
+                sh 'phpunit' // Ejecutar pruebas unitarias con PHPUnit (asegúrate de tener las pruebas escritas)
             }
         }
         
+        // Puedes agregar más etapas aquí, como construcción de assets, análisis estático de código, etc.
+        
+        // Etapa de despliegue (opcional)
         stage('Desplegar') {
             steps {
-                sh 'ansible-playbook deploy.yml' // Ejemplo para desplegar con Ansible, ajusta según tu tecnología
+                // Aquí agregarías los comandos necesarios para desplegar tu aplicación
+                // Esto depende de tu infraestructura y proceso de despliegue
             }
         }
     }
