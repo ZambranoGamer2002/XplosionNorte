@@ -10,19 +10,18 @@ pipeline {
         
         stage('Instalar dependencias') {
             steps {
-                sh 'composer install' // Instalar dependencias PHP utilizando Composer
+                sh 'composer install' // Asume que composer.json está en la raíz del repositorio
             }
         }
         
         stage('Pruebas') {
             steps {
-                sh 'phpunit' // Ejecutar pruebas unitarias con PHPUnit (asegúrate de tener las pruebas escritas)
+                sh 'vendor/bin/phpunit' // Ejecuta PHPUnit desde vendor/bin (ruta por defecto si se instala con Composer)
             }
         }
         
         // Puedes agregar más etapas aquí, como construcción de assets, análisis estático de código, etc.
         
-        // Etapa de despliegue (opcional)
         stage('Desplegar') {
             steps {
                 // Aquí agregarías los comandos necesarios para desplegar tu aplicación
